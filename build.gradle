@@ -1,0 +1,47 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.6
+
+projectUrl = 'http://github.com/vbossica/gradlebox'
+years = '2012'
+version = '1.0-SNAPSHOT'
+group = 'org.vbossica'
+
+junitVersion = '4.8.2'
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+
+  compile gradleApi()
+
+  testCompile "junit:junit:${junitVersion}"
+
+}
+
+tasks.idea.dependsOn(cleanIdea)
+
+task srcZip(type: Zip) {
+  classifier = 'src'
+  from sourceSets*.allSource
+}
+
+tasks.install.dependsOn(':build', ':srcZip')
+install {
+  repositories.mavenInstaller {
+    pom.project {
+      inceptionYear years
+      url projectUrl
+      licenses {
+        license {
+          name 'The Apache Software License, Version 2.0'
+          url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+        }
+      }
+    }
+  }
+}
