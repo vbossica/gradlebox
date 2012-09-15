@@ -4,23 +4,22 @@ apply plugin: 'idea'
 
 sourceCompatibility = 1.6
 
-projectUrl = 'http://github.com/vbossica/gradlebox'
-years = '2012'
-version = '1.0-SNAPSHOT'
+ext.projectUrl = 'http://github.com/vbossica/gradlebox'
+ext.years = '2012'
+
+version = '1.1-SNAPSHOT'
 group = 'org.vbossica'
 
-junitVersion = '4.8.2'
+ext.junitVersion = '4.8.2'
 
 repositories {
   mavenCentral()
 }
 
 dependencies {
-
   compile gradleApi()
 
-  testCompile "junit:junit:${junitVersion}"
-
+  testCompile "junit:junit:${ext.junitVersion}"
 }
 
 tasks.idea.dependsOn(cleanIdea)
@@ -40,8 +39,13 @@ install {
         license {
           name 'The Apache Software License, Version 2.0'
           url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-        }
-      }
-    }
-  }
-}
+}}}}}
+
+tasks.idea.dependsOn(cleanIdea)
+idea {
+  project.ipr {
+    withXml { provider ->
+      def component = provider.node.component.find { it.@name == 'VcsDirectoryMappings' }
+      component.mapping.@directory = '$PROJECT_DIR$'
+      component.mapping.@vcs = 'Git'
+}}}

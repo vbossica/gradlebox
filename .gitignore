@@ -1,7 +1,11 @@
 *~
+
+# gradle files
 .gradle
 build
+
+# intellij files
 *.iml
 *.ipr
 *.iws
-
+out

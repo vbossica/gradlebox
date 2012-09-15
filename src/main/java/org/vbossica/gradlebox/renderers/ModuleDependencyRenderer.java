@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * @author Vladimir Ritz Bossicard
+ * @author vladimir
  */
 public class ModuleDependencyRenderer extends TextReportRenderer implements DependencyReportRenderer {
 
@@ -57,12 +57,12 @@ public class ModuleDependencyRenderer extends TextReportRenderer implements Depe
 	}
 
 	@Override
-	public void completeConfiguration(Configuration files) {
+	public void render( final Configuration files ) throws IOException {
 		// Do nothing
 	}
 
 	@Override
-	public void render(ResolvedConfiguration resolvedConfiguration) throws IOException {
+	public void completeConfiguration(Configuration files) {
 		// Do nothing
 	}
 
