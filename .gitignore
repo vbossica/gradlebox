@@ -9,3 +9,6 @@ build
 *.ipr
 *.iws
 out
+
+# osx files
+.DS_store

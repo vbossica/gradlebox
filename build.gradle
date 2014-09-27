@@ -2,15 +2,17 @@ apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'idea'
 
-sourceCompatibility = 1.6
+sourceCompatibility = 1.7
 
 ext.projectUrl = 'http://github.com/vbossica/gradlebox'
-ext.years = '2012'
+ext.years = '2012-2014'
 
 version = '1.1-SNAPSHOT'
 group = 'org.vbossica'
 
-ext.junitVersion = '4.8.2'
+ext {
+  junitVersion = '4.8.2'
+}
 
 repositories {
   mavenCentral()
@@ -19,7 +21,7 @@ repositories {
 dependencies {
   compile gradleApi()
 
-  testCompile "junit:junit:${ext.junitVersion}"
+  testCompile "junit:junit:${junitVersion}"
 }
 
 tasks.idea.dependsOn(cleanIdea)
@@ -49,3 +51,7 @@ idea {
       component.mapping.@directory = '$PROJECT_DIR$'
       component.mapping.@vcs = 'Git'
 }}}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '2.0'
+}
